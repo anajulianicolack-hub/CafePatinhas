@@ -1,6 +1,8 @@
 package main;
 
+import controller.ClienteController;
 import controller.PagamentoController;
+import view.ClienteView;
 import view.PagamentoView;
 
 public class Main {
@@ -12,5 +14,12 @@ public class Main {
         PagamentoView viewAna = new PagamentoView();
         PagamentoController controllerAna = new PagamentoController(viewAna);
         controllerAna.renderizarTela();
+
+        ClienteView view = new ClienteView();
+
+        ClienteController controller =
+                new ClienteController(view);
+
+        controller.iniciar();
     }
 }
