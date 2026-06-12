@@ -9,7 +9,7 @@ public class Mesa {
 
     /*Construtor: inicia o num e define a mesa como livre(false)*/
 
-    public Mesa(int numero, boolean ocupada) {
+    public Mesa(int numero) {
         this.numero = numero;
         this.ocupada = false;
     }
