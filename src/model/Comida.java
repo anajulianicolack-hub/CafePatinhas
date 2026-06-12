@@ -11,7 +11,7 @@ public class Comida extends Produto {
 /*O construtor recebe nome e preço obrigatoriamente(herança da classe mãe)
 * além dos atributos da própria classe*/
 
-    public Comida(String nome, double preco) {
+    public Comida(String nome, double preco, String ingredientes, boolean contemGluten) {
         super(nome, preco);
         this.ingredientes = ingredientes;
         this.contemGluten = contemGluten;
