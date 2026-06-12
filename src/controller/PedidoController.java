@@ -1,39 +1,33 @@
-package Controller;
+package controller;
 
-import Model.Comida;
-import Model.PedidoModel;
-import View.PedidoView;
+import model.Comida;
+import model.PedidoModel;
+import view.PedidoView;
 
-public class PedidoController implements BaseController {
+public class PedidoController {
 
+    /*O controlador gerencia a model e a View*/
+    private PedidoModel model;
+    private PedidoView view;
 
-   /*O controlador gerencia a model e a View*/
-   private PedidoModel model;
-   private PedidoView view;
+    /*Construtorzão*/
+    public PedidoController(PedidoModel model, PedidoView view) {
+        this.model = model;
+        this.view = view;
+    }
 
+    /*Metódo que calcula o valor total(método que chama em pagamento(ana))*/
+    public double calcularTotal(Comida comida){
+        return comida.getPreco();
+    }
 
-   /*Construtorzão*/
-   public PedidoController(PedidoModel model, PedidoView view) {
-       this.model = model;
-       this.view = view;
-   }
+    /*Metodo que inicia as ações do pedido*/
+    public void executar(){
+        /*Quando é iniciado um novo pedido o status da mesa altera para ocuapada*/
+        model.getMesa().setOcupada(true);
 
-
-   /*Metódo que calcula o valor total(método que chama em pagamento(ana))*/
-   public double calcularTotal(Comida comida){
-       return comida.getPreco();
-   }
-
-
-   /*Método obrigatório da interface BaseController*/
-   @Override
-   public void executar() {
-       // 1. Quando o pedido inicia, o controlador muda o status da mesa para ocupada
-       model.getMesa().setOcupada(true);
-
-
-       // 2. Aciona a view para avisar na tela que a comanda eletrônica abriu
-       view.exibirPedidoIniciado(model.getId(), model.getMesa());
-   }
+        /*Chama a view para iniciar uma comanda*/
+        view.exibirPedidoIniciado(model.getId(), model.getMesa().getNumero());
+    }
 }
 
