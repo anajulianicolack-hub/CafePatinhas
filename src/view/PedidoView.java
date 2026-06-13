@@ -2,7 +2,7 @@ package view;
 
 import model.Comida;
 import model.Mesa;
-import model.PedidoModel;
+import model.Pedido;
 
 public class PedidoView {
     /*Classe responsável por todas as interações visuais no console*/
@@ -39,7 +39,7 @@ public class PedidoView {
     }
 
     /*Mostra o resumo do pedido com a comida e a mesa e o valor*/
-    public void exibirResumoPedido(PedidoModel pedido, Comida comida, double valorTotal) {
+    public void exibirResumoPedido(Pedido pedido, Comida comida, double valorTotal) {
         System.out.println("======================");
         System.out.println("  RESUMO DO PEDIDO   ");
         System.out.println("======================");

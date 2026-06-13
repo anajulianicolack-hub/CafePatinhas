@@ -1,17 +1,17 @@
 package controller;
 
 import model.Comida;
-import model.PedidoModel;
+import model.Pedido;
 import view.PedidoView;
 
 public class PedidoController {
 
     /*O controlador gerencia a model e a View*/
-    private PedidoModel model;
+    private Pedido model;
     private PedidoView view;
 
     /*Construtorzão*/
-    public PedidoController(PedidoModel model, PedidoView view) {
+    public PedidoController(Pedido model, PedidoView view) {
         this.model = model;
         this.view = view;
     }
