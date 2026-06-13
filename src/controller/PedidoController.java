@@ -2,7 +2,8 @@ package controller;
 
 import model.Comida;
 import model.Mesa;
-import model.PedidoModel;
+import model.Pedido;
+import model.Pedido;
 import view.PedidoView;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class PedidoController {
 
     private ArrayList<Comida> comidas = new ArrayList<>();
     private ArrayList<Mesa> mesas = new ArrayList<>();
-    private ArrayList<PedidoModel> pedidos = new ArrayList<>();
+    private ArrayList<Pedido> pedidos = new ArrayList<>();
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -110,7 +111,7 @@ public class PedidoController {
 
         Comida comida = comidas.get(escolha - 1);
 
-        PedidoModel pedido = new PedidoModel(id, mesaSelecionada, comida);
+        Pedido pedido = new Pedido(id, mesaSelecionada, comida);
         pedidos.add(pedido);
 
         System.out.println("Pedido cadastrado!");
@@ -122,11 +123,15 @@ public class PedidoController {
             System.out.println(" ❌ Nenhum pedido cadastrado");
             return;
         }
-        for (PedidoModel pedido : pedidos){
+        for ( Pedido pedido : pedidos){
             System.out.println("\nPedido: " + pedido.getId());
             System.out.println("Mesa: " + pedido.getMesa().getNumero());
             System.out.println("Comida: " + pedido.getComida().getNome());
             System.out.println("Valor: R$ " + pedido.getComida().getPreco());
         }
+    }
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
     }
 }

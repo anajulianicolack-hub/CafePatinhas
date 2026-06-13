@@ -1,6 +1,6 @@
 package model;
 
-public class PedidoModel {
+public class Pedido {
     /*Atributos privados (segurança do sistema)*/
     private int id;
     private Mesa mesa;
@@ -8,7 +8,7 @@ public class PedidoModel {
 
     /*Construtor: todo pedido nasce com um número d eID e uam Mesa*/
 
-    public PedidoModel(int id, Mesa mesa, Comida comida) {
+    public Pedido(int id, Mesa mesa, Comida comida) {
         this.id = id;
         this.mesa = mesa;
         this.comida = comida;

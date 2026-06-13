@@ -1,67 +1,45 @@
 package main;
 
-import java.util.Scanner;
-
-// Importações dos Controllers
 import controller.ClienteController;
 import controller.PedidoController;
+import controller.PetController;
 import controller.PagamentoController;
-// import controller.PetController; // Descomente quando a Naty passar o dela!
 
-// Importações das Views
 import view.ClienteView;
 import view.PedidoView;
 import view.PagamentoView;
-// import view.PetView; // Descomente quando a Naty passar o dela!
 
-// Importações dos Models necessários para o fluxo
-import model.Mesa;
-import model.Comida;
-import model.Pedido;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // Scanner exclusivo para o menu principal
         Scanner scanner = new Scanner(System.in);
 
-        // -----------------------------------------------------------------
-        // 1. INSTANCIANDO AS VIEWS (TELAS)
-        // -----------------------------------------------------------------
+        // 1. Instanciamos todas as Views (as telas)
         ClienteView clienteView = new ClienteView();
         PedidoView pedidoView = new PedidoView();
         PagamentoView pagamentoView = new PagamentoView();
-        // PetView petView = new PetView(); // Módulo da Naty
 
-        // -----------------------------------------------------------------
-        // 2. INSTANCIANDO OS CONTROLLERS PRINCIPAIS
-        // -----------------------------------------------------------------
+        // 2. Instanciamos os controladores de Cliente, Pedido e Pet
         ClienteController clienteController = new ClienteController(clienteView);
+        PedidoController pedidoController = new PedidoController(pedidoView);
+        PetController petController = new PetController();
 
-        // -----------------------------------------------------------------
-        // 3. OBJETOS DE FLUXO (Para integrar Isa e Ana em tempo real)
-        // -----------------------------------------------------------------
-        // Simulando que o cliente sentou na Mesa 4 e pediu um Muffin
-        Mesa mesaExemplo = new Mesa(4);
-        Pedido pedidoAtual = new Pedido(102, mesaExemplo);
-        Comida comidaPedida = new Comida("Muffin de Blueberry", 14.90, "Farinha, blueberry, açúcar", false);
+        // 3. CONEXÃO DINÂMICA: Instanciamos o PagamentoController passando a lista REAIS de pedidos.
+        // O método pedidoController.getPedidos() passa a REFERÊNCIA da lista viva para o pagamento.
+        PagamentoController pagamentoController = new PagamentoController(pagamentoView, pedidoController.getPedidos());
 
-        PedidoController pedidoController = new PedidoController(pedidoAtual, pedidoView);
-        PagamentoController pagamentoController = new PagamentoController(pagamentoView, pedidoAtual, comidaPedida);
-
-        int opcao = -1;
-
-        // -----------------------------------------------------------------
-        // 4. MENU PRINCIPAL INTERATIVO
-        // -----------------------------------------------------------------
+        int opcao = 0;
         do {
-            System.out.println("\n=========================================");
-            System.out.println("      ☕ SISTEMA CAFÉ PATINHAS 🐾        ");
-            System.out.println("=========================================");
-            System.out.println(" [1] Gerenciar Clientes (Módulo Ste)");
-            System.out.println(" [2] Iniciar Comanda / Pedido (Módulo Isa)");
-            System.out.println(" [3] Módulo de Adoção de Pets (Módulo Naty)");
-            System.out.println(" [4] Fechar Conta e Pagamento (Módulo Ana)");
-            System.out.println(" [0] Sair do Sistema");
-            System.out.println("=========================================");
+            System.out.println("\n====================================");
+            System.out.println("     🐾 CAFÉ PATINHAS - SISTEMA 🐾   ");
+            System.out.println("====================================");
+            System.out.println("[1] Gerenciar Clientes");
+            System.out.println("[2] Gerenciar Pedidos, Mesas e Comidas");
+            System.out.println("[3] Menu de Adoção e Pets");
+            System.out.println("[4] Realizar Pagamento de um Pedido");
+            System.out.println("[0] Sair do Sistema");
             System.out.print("Escolha uma opção: ");
 
             try {
@@ -69,44 +47,33 @@ public class Main {
 
                 switch (opcao) {
                     case 1:
-                        // Abre o menu interno de CRUD de clientes que a Ste fez
-                        System.out.println("\n--- Entrando no Módulo de Clientes ---");
+                        // Passa o controle para o menu de Clientes (CRUD)
                         clienteController.iniciar();
                         break;
-
                     case 2:
-                        // Inicia o fluxo de comanda eletrônica da Isa
-                        System.out.println("\n--- Processando Pedido na Mesa ---");
-                        pedidoController.executar();
-                        // Mostra o resumo do que foi consumido
-                        pedidoView.exibirResumoPedido(pedidoAtual, comidaPedida, comidaPedida.getPreco());
+                        // Passa o controle para o menu de Pedidos.
+                        // Aqui você vai cadastrar comidas, mesas e os pedidos reais.
+                        pedidoController.iniciar();
                         break;
-
                     case 3:
-                        // Espaço reservado para o menu ou método da Naty
-                        System.out.println("\n--- Entrando no Módulo de Adoção ---");
-                        System.out.println("🐾 [Naty] Buscando pets disponíveis para adoção...");
-                        // petController.iniciarAdocao();
+                        // Passa o controle para o menu de Pets e Adoção
+                        petController.iniciar();
                         break;
-
                     case 4:
-                        // Chama a sua tela de pagamento puxando os dados reais do pedido da Isa!
-                        System.out.println("\n--- Direcionando ao Caixa ---");
+                        // Aciona o fluxo de pagamento que buscará o ID digitado
+                        // direto na lista de pedidos reais que você criou na opção 2!
                         pagamentoController.renderizarTela();
                         break;
-
                     case 0:
-                        System.out.println("\n🐾 Finalizando o sistema do Café Patinhas. Até mais! ☕");
+                        System.out.println("\nSistema encerrado. Obrigado por usar o Café Patinhas! 🐾");
                         break;
-
                     default:
-                        System.out.println("\n⚠️ Opção inválida! Escolha um número de 0 a 4.");
+                        System.out.println("⚠️ Opção inválida! Tente novamente.");
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\n⚠️ Erro: Por favor, digite apenas números inteiros.");
+                System.out.println("⚠️ Por favor, digite um número válido.");
             }
-
         } while (opcao != 0);
 
         scanner.close();
