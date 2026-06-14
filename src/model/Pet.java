@@ -22,23 +22,14 @@ public class Pet implements Adotavel {
 
     @Override
     public void realizarAdocao() {
-        if (this.adotado == false) {
+        if (!adotado) {
             adotado = true;
-            System.out.println("Pet " + nome + " foi adotado!!");
-        }else{
-            System.out.println("Não é possivel adotar o pet " + nome);
         }
     }
 
     @Override
-    public boolean isAdotado() {
-        if(adotado == true){
-            System.out.println("Pet " + nome + " foi adotado!!");
-        }else{
-            System.out.println("Pet " + nome + " não está adotado!!");
-        }
-
-        return this.adotado;
+    public boolean estaAdotado() {
+        return adotado;
     }
 
     public int getId() {
@@ -61,7 +52,7 @@ public class Pet implements Adotavel {
         return raca;
     }
 
-    public void setRaça(String raca) {
+    public void setRaca(String raca) {
         this.raca = raca;
     }
 
