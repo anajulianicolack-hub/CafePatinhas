@@ -106,7 +106,7 @@ public class PedidoController {
             System.out.println((i + 1) + " - " + comidas.get(i).getNome());
         }
 
-        System.out.println("Escolha uma comida: ");
+        System.out.print("Escolha uma comida: ");
         int escolha = Integer.parseInt(scanner.nextLine());
 
         Comida comida = comidas.get(escolha - 1);
