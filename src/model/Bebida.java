@@ -3,9 +3,9 @@ package model;
 
 public class Bebida extends Produto{
 
-    private String tamanho;  // "pequeno", "medio", "grande";
-    private boolean gelado;  // se for gelado true, se for quente false
-    private String tipo;     // Cafe, CafeComLeite, Capuccino, Latte, Suco, Cha
+    private String tamanho;
+    private boolean gelado;
+    private String tipo;
 
     public Bebida(String nome, double preco, String tipo, String tamanho, boolean gelado) {
         super(nome, preco);

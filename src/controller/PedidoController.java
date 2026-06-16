@@ -49,16 +49,16 @@ public class PedidoController {
     }
 
     private void cadastrarComida(){
-        System.out.println("Nome: ");
+        System.out.print("Nome: ");
         String nome = scanner.nextLine();
 
-        System.out.println("Preço: ");
+        System.out.print("Preço: ");
         double preco = Double.parseDouble(scanner.nextLine());
 
-        System.out.println("Ingredientes: ");
+        System.out.print("Ingredientes: ");
         String ingredientes = scanner.nextLine();
 
-        System.out.println("Contém glúten (true/false): ");
+        System.out.print("Contém glúten (true/false): ");
         boolean gluten = Boolean.parseBoolean(scanner.nextLine());
 
         comidas.add(new Comida(nome, preco,ingredientes, gluten));
@@ -67,7 +67,7 @@ public class PedidoController {
     }
 
     private void cadastrarMesa(){
-        System.out.println("Número da mesa: ");
+        System.out.print("Número da mesa: ");
         int numero = Integer.parseInt(scanner.nextLine());
         
         mesas.add(new Mesa(numero));
@@ -81,10 +81,10 @@ public class PedidoController {
             return;
         }
 
-        System.out.println("ID do pedido: ");
+        System.out.print("ID do pedido: ");
         int id = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Número da mesa: ");
+        System.out.print("Número da mesa: ");
         int numeroMesa = Integer.parseInt(scanner.nextLine());
 
         Mesa mesaSelecionada = null;

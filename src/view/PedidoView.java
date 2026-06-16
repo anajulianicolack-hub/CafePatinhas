@@ -3,8 +3,7 @@ package view;
 import java.util.Scanner;
 
 public class PedidoView {
-    /*Classe responsável por todas as interações visuais no console*/
-    /*Relacionado ao fluxo de pedidos, comidas e mesas*/
+
     private final Scanner scanner = new Scanner(System.in);
     public int exibirMenu() {
         System.out.println("\n===== CAFÉ PATINHAS =====");
