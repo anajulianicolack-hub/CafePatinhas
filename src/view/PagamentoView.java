@@ -11,6 +11,11 @@ public class PagamentoView {
         return Integer.parseInt(scan.nextLine());
     }
 
+    public int lerIdFuncionario() {
+        System.out.print("Digite o ID do Funcionário (caixa): ");
+        return Integer.parseInt(scan.nextLine());
+    }
+
     public void exibirConfirmacaoDePagamento(int idPedido, double total){
         System.out.println("\n===== 💳 FECHAMENTO DE CAIXA =====");
         System.out.println("Pedido ID: #" + idPedido);
@@ -35,9 +40,10 @@ public class PagamentoView {
 
     }
 
-    public void mostrarRecibo(String forma, double valor){
+    public void mostrarRecibo(String forma, double valor, String nomeFuncionario){
         System.out.println("\n===== ✨ Pagamento processado com sucesso! ✨ =====");
         System.out.printf(" | Recebido: R$ %.2f via %s.\n", valor, forma);
+        System.out.println(" | Atendido por: " + nomeFuncionario);
         System.out.println(">>> O Café Patinhas agradece a preferência! 🐾 <<<\n");
     }
 }

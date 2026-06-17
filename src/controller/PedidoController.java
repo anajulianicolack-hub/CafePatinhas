@@ -144,6 +144,7 @@ public class PedidoController {
         if (escolha != 0){
             comidaSelecionada = comidas.get(escolha - 1); // <-- ADICIONEI
         }
+
          /*ADICIONEI ESSE BLOCO DE BEBIDA INTEIRO*/
         System.out.println("\n☕ Bebidas cadastradas:");
         for (int i = 0; i < bebidas.size(); i++){

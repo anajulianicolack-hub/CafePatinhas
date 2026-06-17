@@ -1,5 +1,6 @@
 package controller;
 
+import model.Funcionario;
 import model.Pedido;
 import model.Pagamento;
 import view.PagamentoView;
@@ -9,10 +10,12 @@ public class PagamentoController {
     private Pagamento model;
     private PagamentoView view;
     private ArrayList<Pedido> listaDePedidos;
+    private FuncionarioController funcionarioController;
 
-    public PagamentoController(PagamentoView view, ArrayList<Pedido> listaDePedidos) {
+    public PagamentoController(PagamentoView view, ArrayList<Pedido> listaDePedidos, FuncionarioController funcionarioController) {
         this.view = view;
         this.listaDePedidos = listaDePedidos;
+        this.funcionarioController = funcionarioController; // Salva o controlador
     }
 
     public void renderizarTela() {
@@ -51,10 +54,25 @@ public class PagamentoController {
     }
 
     public void atualizarDados(int idReal, double totalReal) {
+
+        int idFuncio = view.lerIdFuncionario();
+        Funcionario funcioSelecionado = null;
+
+        for (Funcionario f : funcionarioController.getFuncionarios()) {
+            if (f.getId() == idFuncio) {
+                funcioSelecionado = f;
+                break;
+            }
+        }
+
+        if (funcioSelecionado == null) {
+            System.out.println("❌ Funcionário não encontrado! Operação de pagamento cancelada.");
+            return;
+        }
         String formaEscolhida = view.selecionarFormaPagamento();
 
-        this.model = new Pagamento(idReal, formaEscolhida, totalReal);
+        this.model = new Pagamento(idReal, formaEscolhida, totalReal, funcioSelecionado);
 
-        view.mostrarRecibo(model.getFormaPagamento(), model.getValorPago());
+        view.mostrarRecibo(model.getFormaPagamento(), model.getValorPago(), funcioSelecionado.getNome());
     }
 }
