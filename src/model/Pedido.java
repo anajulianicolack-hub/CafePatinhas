@@ -5,13 +5,13 @@ public class Pedido {
     private int id;
     private Mesa mesa;
     private Comida comida;
-    private Bebida bebida; // <-- ADICIONEI
+    private Bebida bebida;
 
-    public Pedido(int id, Mesa mesa, Comida comida, Bebida bebida /*<-- ADICIONEI*/) {
+    public Pedido(int id, Mesa mesa, Comida comida, Bebida bebida) {
         this.id = id;
         this.mesa = mesa;
         this.comida = comida;
-        this.bebida = bebida; // <--- ADICIONEI
+        this.bebida = bebida;
     }
 
     public int getId() {
@@ -32,6 +32,6 @@ public class Pedido {
     public void setComida(Comida comida) {
         this.comida = comida;
     }
-    public Bebida getBebida() { return bebida; } // <-- ADICIONEI
-    public void setBebida(Bebida bebida) { this.bebida = bebida; } // <-- ADICIONEI
+    public Bebida getBebida() { return bebida; }
+    public void setBebida(Bebida bebida) { this.bebida = bebida; }
 }

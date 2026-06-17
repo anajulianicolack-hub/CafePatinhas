@@ -15,13 +15,10 @@ public class PetController {
     private PetView view = new PetView();
     private ClienteController clienteController;
 
-    //lista que armazena os pets
     private List<Pet> listaPets = new ArrayList<>();
 
-    //lista que armazena os Clientes que realizaram adoção, e o seu pet adotado
     private List<Adocao> adocoes = new ArrayList<>();
 
-    //pets iniciais (para visualização)
     public PetController(ClienteController clienteController) {
         this.clienteController = clienteController;
         listaPets.add(new Pet(1, "Luna", "Persa", 6, "F", false));
@@ -29,7 +26,6 @@ public class PetController {
         listaPets.add(new Pet(3, "José", "Vira-lata", 5, "F", false));
     }
 
-    //função para escolha das ações
     public void iniciar() {
         int opcao;
 
@@ -64,7 +60,6 @@ public class PetController {
 
     }
 
-    // funçao que coleta numero inteiro, caso necessário trata erro
     public int coletarInteiro(String mensagem) {
         while (true) {
             try {
@@ -80,7 +75,6 @@ public class PetController {
         }
     }
 
-    // função que realiza a busca de um pet pelo id
     public Pet buscarPetPorId(int petId) {
         for (Pet pet : listaPets) {
             if (pet.getId() == petId) {
@@ -90,7 +84,6 @@ public class PetController {
         return null;
     }
 
-    //função para cadastrar pet
     public void cadastrarPet() {
         System.out.println();
         System.out.println("╔════════════════════════════════════╗");
@@ -124,7 +117,6 @@ public class PetController {
 
     }
 
-    //função para consultar dados do pet
     public void consultarPet() {
         System.out.println();
         System.out.println("╔════════════════════════════════════╗");
@@ -149,7 +141,6 @@ public class PetController {
         System.out.println("└────────────────────────────────────");
     }
 
-    //função para adotar pet
     public void adotar() {
         System.out.println();
         System.out.println("╔════════════════════════════════════╗");
@@ -189,7 +180,6 @@ public class PetController {
 
     }
 
-    //função para verificação do status de adoção
     public void statusPet() {
         System.out.println();
         System.out.println("╔════════════════════════════════════╗");
@@ -213,7 +203,6 @@ public class PetController {
 
     }
 
-    //função para remover pet da lista
     public void removerPet() {
         System.out.println();
         System.out.println("╔════════════════════════════════════╗");
@@ -233,8 +222,6 @@ public class PetController {
         System.out.println("✅ Pet removido com sucesso.");
     }
 
-
-    //função para listar todos os pets disponíveis para adoção
     public void listarPetsDisponiveis() {
         System.out.println();
         System.out.println("╔════════════════════════════════════╗");
