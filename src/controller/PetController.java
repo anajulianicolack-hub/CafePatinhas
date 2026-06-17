@@ -141,11 +141,11 @@ public class PetController {
         }
 
         System.out.println("┌────────────────────────────────────");
-        System.out.println ("│ ID: " + pet.getId());
-        System.out.println ("│ Nome: " + pet.getNome());
-        System.out.println ("│ Raça: " + pet.getRaca());
-        System.out.println ("│ Peso: " + pet.getPeso());
-        System.out.println ("│ Sexo: " + pet.getSexo());
+        System.out.println("│ ID: " + pet.getId());
+        System.out.println("│ Nome: " + pet.getNome());
+        System.out.println("│ Raça: " + pet.getRaca());
+        System.out.println("│ Peso: " + pet.getPeso());
+        System.out.println("│ Sexo: " + pet.getSexo());
         System.out.println("└────────────────────────────────────");
     }
 
@@ -234,7 +234,6 @@ public class PetController {
     }
 
 
-
     //função para listar todos os pets disponíveis para adoção
     public void listarPetsDisponiveis() {
         System.out.println();
@@ -280,12 +279,13 @@ public class PetController {
         }
 
         for (Pet pet : listaPets) {
-            int clienteId = 0;
 
             if (pet.estaAdotado()) {
+                Cliente cliente = null;
+
                 for (Adocao adocao : adocoes) {
                     if (adocao.getPetId() == pet.getId()) {
-                        clienteId = adocao.getClienteId();
+                        cliente = clienteController.buscarPorId(adocao.getClienteId());
                         break;
                     }
                 }
@@ -295,11 +295,15 @@ public class PetController {
                 System.out.println("│ Nome: " + pet.getNome());
                 System.out.println("│ Raça: " + pet.getRaca());
                 System.out.println("│ Sexo: " + pet.getSexo());
-                System.out.println("│ Cliente ID: " + clienteId);
+                System.out.println("│ ");
+                System.out.println("│ - Adotado por - ");
+                if (cliente != null) {
+                    System.out.println("│ Cliente ID: " + cliente.getId());
+                    System.out.println("│ Cliente Nome: " + cliente.getNome());
+                }
                 System.out.println("└────────────────────────────────────");
                 System.out.println();
             }
         }
     }
-
 }
