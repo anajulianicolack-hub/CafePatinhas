@@ -106,7 +106,12 @@ public class PetController {
         int peso = coletarInteiro("Peso do Pet: ");
 
         System.out.print("Sexo (F/M): ");
-        String sexo = scan.nextLine();
+        String sexo = scan.nextLine().toUpperCase();
+
+        if (!sexo.equals("F") && !sexo.equals("M")) {
+            System.out.println("⚠️ Erro: Escolha um sexo válido (F ou M)!");
+            return;
+        }
 
         Pet pet = new Pet(id, nome, raca, peso, sexo, false);
         listaPets.add(pet);
