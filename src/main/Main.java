@@ -40,7 +40,7 @@ public class Main {
             System.out.println("     🐾 CAFÉ PATINHAS - SISTEMA 🐾   ");
             System.out.println("====================================");
             System.out.println(" | [1] Gerenciar Clientes");
-            System.out.println(" | [2] Gerenciar Pedidos, Mesas e Comidas");
+            System.out.println(" | [2] Gerenciar Pedidos, Mesas, Comidas e Bebidas");
             System.out.println(" | [3] Menu de Adoção e Pets");
             System.out.println(" | [4] Realizar Pagamento de um Pedido");
             System.out.println(" | [5] Gerenciar Funcionários");
