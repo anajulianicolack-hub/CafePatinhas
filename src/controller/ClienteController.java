@@ -95,7 +95,7 @@ public class ClienteController {
             view.mostrarMensagem("Cliente não encontrado.");
         }
     }
-    private Cliente buscarPorId(int id) {
+   public Cliente buscarPorId(int id) {
         for (Cliente cliente : clientes) {
             if (cliente.getId() == id) {
                 return cliente;
