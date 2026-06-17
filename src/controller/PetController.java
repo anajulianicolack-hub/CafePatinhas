@@ -1,6 +1,7 @@
 package controller;
 
 import model.Adocao;
+import model.Cliente;
 import model.Pet;
 import view.PetView;
 
@@ -12,6 +13,7 @@ public class PetController {
 
     private Scanner scan = new Scanner(System.in);
     private PetView view = new PetView();
+    private ClienteController clienteController;
 
     //lista que armazena os pets
     private List<Pet> listaPets = new ArrayList<>();
@@ -20,7 +22,8 @@ public class PetController {
     private List<Adocao> adocoes = new ArrayList<>();
 
     //pets iniciais (para visualização)
-    public PetController() {
+    public PetController(ClienteController clienteController) {
+        this.clienteController = clienteController;
         listaPets.add(new Pet(1, "Luna", "Persa", 6, "F", false));
         listaPets.add(new Pet(2, "Mingau", "Siamês", 4, "M", false));
         listaPets.add(new Pet(3, "José", "Vira-lata", 5, "F", false));
@@ -154,6 +157,14 @@ public class PetController {
         System.out.println("╚════════════════════════════════════╝");
 
         int clienteId = coletarInteiro("Digite o ID do cliente: ");
+
+        Cliente cliente = clienteController.buscarPorId(clienteId);
+
+        if (cliente == null) {
+            System.out.println("⚠️ Cliente não encontrado!");
+            return;
+        }
+
         int petId = coletarInteiro("Digite o número de identificação do Pet: ");
 
         Pet pet = buscarPetPorId(petId);
@@ -171,7 +182,7 @@ public class PetController {
 
             System.out.println();
             System.out.println("✅ Adoção registrada com sucesso!");
-            System.out.println("🏠 " + pet.getNome() + " agora possui um novo lar.");
+            System.out.println("🏠 " + cliente.getNome() + " adotou " + pet.getNome() + "!");
         } else {
             System.out.println("⚠️ Esse pet já foi adotado.");
         }

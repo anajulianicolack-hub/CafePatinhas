@@ -22,7 +22,7 @@ public class Main {
 
         ClienteController clienteController = new ClienteController(clienteView);
         PedidoController pedidoController = new PedidoController(pedidoView);
-        PetController petController = new PetController();
+        PetController petController = new PetController(clienteController);
 
         PagamentoController pagamentoController = new PagamentoController(pagamentoView, pedidoController.getPedidos());
 
