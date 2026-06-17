@@ -1,8 +1,6 @@
 package controller;
 
-import model.Comida;
-import model.Mesa;
-import model.Pedido;
+import model.*;
 import model.Pedido;
 import view.PedidoView;
 
@@ -13,6 +11,7 @@ public class PedidoController {
     private PedidoView view;
 
     private ArrayList<Comida> comidas = new ArrayList<>();
+    private ArrayList<Bebida> bebidas = new ArrayList<>(); //<-- ADICIONEI
     private ArrayList<Mesa> mesas = new ArrayList<>();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
 
@@ -31,21 +30,24 @@ public class PedidoController {
                     cadastrarComida();
                     break;
                 case 2:
-                    cadastrarMesa();
+                    cadastrarBebida();
                     break;
                 case 3:
-                    cadastrarPedido();
+                    cadastrarMesa();
                     break;
                 case 4:
-                    listarPedidos();
+                    cadastrarPedido();
                     break;
                 case 5:
+                    listarPedidos();
+                    break;
+                case 6:
                     view.mostrarMensagem("Encerrando..");
                     break;
                 default:
                     view.mostrarMensagem("Opção inválida!");
             }
-        }while (op != 5);
+        }while (op != 6);
     }
 
     private void cadastrarComida(){
@@ -66,6 +68,28 @@ public class PedidoController {
         System.out.println("🧁Comida cadastrada!");
     }
 
+    /*ADICIONEI UM BLOCO INTEIRO PARA CADASTRAR BEBIDA*/
+    private void cadastrarBebida(){
+        System.out.print("Nome da bebida: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Preço: ");
+        double preco = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Tipo (Cha/Café/Suco/Refrigerante): ");
+        String tipo = scanner.nextLine();
+
+        System.out.print("Tamanho (Pequeno/Médio/Grande): ");
+        String tamanho = scanner.nextLine();
+
+        System.out.print("É gelado (true/false): ");
+        boolean gelado = Boolean.parseBoolean(scanner.nextLine());
+
+        bebidas.add(new Bebida(nome, preco, tipo, tamanho, gelado));
+
+        System.out.println("☕ Bebida cadastrada com sucesso!");
+    }
+
     private void cadastrarMesa(){
         System.out.print("Número da mesa: ");
         int numero = Integer.parseInt(scanner.nextLine());
@@ -76,7 +100,7 @@ public class PedidoController {
     }
 
     private void cadastrarPedido(){
-        if (mesas.isEmpty() || comidas.isEmpty()){
+        if (mesas.isEmpty() || (comidas.isEmpty() && bebidas.isEmpty()) /*<-- ADICIONEI*/){
             System.out.println("Cadastre ao menos uma mesa e uma comida");
             return;
         }
@@ -100,34 +124,75 @@ public class PedidoController {
             System.out.println("Mesa não encontrada!");
             return;
         }
+
+        /*ADICIONEI ESSE IF PARA VER SE A MESA TA OCUPADA*/
+        if (mesaSelecionada.isOcupada() == true) {
+            System.out.println("❌ Esta mesa já está ocupada por outro cliente!");
+            return;
+        }
+
         System.out.println("🧁 Comidas cadastradas:");
 
         for (int i = 0; i < comidas.size(); i++) {
             System.out.println((i + 1) + " - " + comidas.get(i).getNome());
         }
-
+        System.out.println("0 - nenhuma comida"); // <-- ADICIONEI
         System.out.print("Escolha uma comida: ");
         int escolha = Integer.parseInt(scanner.nextLine());
 
-        Comida comida = comidas.get(escolha - 1);
+        Comida comidaSelecionada = null; // <-- ADICIONEI
+        if (escolha != 0){
+            comidaSelecionada = comidas.get(escolha - 1); // <-- ADICIONEI
+        }
+         /*ADICIONEI ESSE BLOCO DE BEBIDA INTEIRO*/
+        System.out.println("\n☕ Bebidas cadastradas:");
+        for (int i = 0; i < bebidas.size(); i++){
+            System.out.println((i + 1) + " - " + bebidas.get(i).getNome());
+        }
+        System.out.println("0 - nenhuma bebida");
+        System.out.print("Escolha uma bebida: ");
+        int escolhaBebida = Integer.parseInt(scanner.nextLine());
 
-        Pedido pedido = new Pedido(id, mesaSelecionada, comida);
+        Bebida bebidaSelecionada = null;
+        if (escolhaBebida != 0) {
+            bebidaSelecionada = bebidas.get(escolhaBebida - 1);
+        }
+
+        Pedido pedido = new Pedido(id, mesaSelecionada, comidaSelecionada, bebidaSelecionada);
         pedidos.add(pedido);
+
+        mesaSelecionada.setOcupada(true); //<-- ADICIONEI
 
         System.out.println("Pedido cadastrado!");
     }
 
     private void listarPedidos(){
-
         if(pedidos.isEmpty()){
             System.out.println(" ❌ Nenhum pedido cadastrado");
             return;
         }
-        for ( Pedido pedido : pedidos){
+        for (Pedido pedido : pedidos){
             System.out.println("\nPedido: " + pedido.getId());
             System.out.println("Mesa: " + pedido.getMesa().getNumero());
-            System.out.println("Comida: " + pedido.getComida().getNome());
-            System.out.println("Valor: R$ " + pedido.getComida().getPreco());
+
+            double valorTotalDoPedido = 0.0; // ADICIONEI
+
+            if (pedido.getComida() != null) {
+                System.out.println("Comida: " + pedido.getComida().getNome());
+                valorTotalDoPedido = valorTotalDoPedido + pedido.getComida().getPreco();
+            } else {
+                System.out.println("Comida: Nenhuma");
+            }
+
+            if (pedido.getBebida() != null) {
+                System.out.println("Bebida: " + pedido.getBebida().getNome());
+                valorTotalDoPedido = valorTotalDoPedido + pedido.getBebida().getPreco();
+            } else {
+                System.out.println("Bebida: Nenhuma");
+            }
+
+            System.out.println("Valor Total: R$ " + valorTotalDoPedido);
+            System.out.println("------------------------");
         }
     }
 

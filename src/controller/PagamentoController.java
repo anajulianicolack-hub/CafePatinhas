@@ -28,8 +28,15 @@ public class PagamentoController {
 
         for (Pedido p : listaDePedidos) {
             if (p.getId() == idProcurado) {
-                totalAcumulado += p.getComida().getPreco();
                 encontrouPeloMenosUm = true;
+
+                if (p.getComida() != null){
+                    totalAcumulado = totalAcumulado + p.getComida().getPreco();
+                }
+
+                if (p.getBebida() != null){
+                    totalAcumulado = totalAcumulado + p.getBebida().getPreco();
+                }
             }
         }
 

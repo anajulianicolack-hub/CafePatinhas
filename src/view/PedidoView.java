@@ -8,10 +8,11 @@ public class PedidoView {
     public int exibirMenu() {
         System.out.println("\n===== CAFÉ PATINHAS =====");
         System.out.println("1 - Cadastrar Comida");
-        System.out.println("2 - Cadastrar Mesa");
-        System.out.println("3 - Cadastrar Pedido");
-        System.out.println("4 - Listar Pedidos");
-        System.out.println("5 - Sair");
+        System.out.println("2 - Cadastrar Bebida"); //<-- ADICIONEI
+        System.out.println("3 - Cadastrar Mesa");
+        System.out.println("4 - Cadastrar Pedido");
+        System.out.println("5 - Listar Pedidos");
+        System.out.println("6 - Sair");
 
         System.out.print("Escolha: ");
         return Integer.parseInt(scanner.nextLine());
